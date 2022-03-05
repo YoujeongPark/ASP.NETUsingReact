@@ -1,11 +1,9 @@
 ﻿
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization; 
-
 namespace WebAPI
 {
     public static class Startup
-    {
+    {   
+        // git Test
         public static WebApplication InitializeApp(string [] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -17,20 +15,6 @@ namespace WebAPI
 
         private static void ConfigureServices(WebApplicationBuilder builder)
         {
-            // Enable CCORS
-            builder.Services.AddCors( c =>  
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
-            );
-
-            //Json Seriializer
-            builder.Services.AddControllersWithViews()
-                .AddNewtonsoftJson(
-                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
-                .Json.ReferenceLoopHandling.Ignore)
-                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
-                = new DefaultContractResolver());      
-        
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -40,10 +24,6 @@ namespace WebAPI
 
         private static void Configure(WebApplication app)
         {
-            app.UseCors(
-                options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-            );
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
